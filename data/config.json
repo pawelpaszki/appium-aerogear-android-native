@@ -1,0 +1,14 @@
+{
+  "ANDROID_DETAILS": {
+    "platformVersion": "8.1",
+    "deviceName": "Android Emulator"
+  },
+  "APPIUM_DETAILS": {
+    "port": 4723,
+    "logLevel": "verbose"
+  },
+  "USER": {
+    "username": "",
+    "password": ""
+  }
+}
