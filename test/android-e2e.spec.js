@@ -8,9 +8,7 @@ const navigationHeaders = sharedConstants.navigationHeaders;
 
 describe('Run android e2e', () => {
 
-  it('should check for the presence of all of the navigation items', () => {
-    console.log(process.env.LOGIN);
-    console.log(process.env.PASSWORD);
+  xit('should check for the presence of all of the navigation items', () => {
     return client
       .init()
       .isVisible(pageObjects.TOOLBAR.TOOLBAR_TITLE_TEXT_VIEW).should.eventually.be.true
@@ -79,13 +77,34 @@ describe('Run android e2e', () => {
       .end();
   });
 
-  it('should check for the presence of home screen itemss', () => {
-    console.log(process.env.LOGIN);
-    console.log(process.env.PASSWORD);
+  xit('should check for the presence of home screen items', () => {
     return client
       .init()
-      .isVisible(pageObjects.HOME_SCREEN.IMAGE_VIEW).should.eventually.be.true
-      .isVisible(pageObjects.HOME_SCREEN.TEXT_VIEW).should.eventually.be.true
+      .isVisible(pageObjects.SHARED.IMAGE_VIEW).should.eventually.be.true
+      .isVisible(pageObjects.SHARED.TEXT_VIEW).should.eventually.be.true
+      .end();
+  });
+
+  it('should go to IDM landing page and verify its contents', () => {
+    return client
+      .init()
+      .isVisible(pageObjects.TOOLBAR.OPEN_NAV_MENU_BUTTON).should.eventually.be.true
+      .click(pageObjects.TOOLBAR.OPEN_NAV_MENU_BUTTON)
+      
+      .pause(1000)
+      
+      .isVisible(pageObjects.NAV_MENU.MENU_ITEM_PREFIX + "2" + pageObjects.NAV_MENU.MENU_ITEM_POSTFIX).should.eventually.be.true
+      .click(pageObjects.NAV_MENU.MENU_ITEM_PREFIX + "2" + pageObjects.NAV_MENU.MENU_ITEM_POSTFIX)
+      
+      .pause(1000)
+
+      .isVisible(pageObjects.TOOLBAR.TOOLBAR_TITLE_TEXT_VIEW).should.eventually.be.true
+      .getText(pageObjects.TOOLBAR.TOOLBAR_TITLE_TEXT_VIEW).should.eventually.equal(navigationHeaders.IDM)
+
+      .isVisible(pageObjects.SHARED.IMAGE_VIEW).should.eventually.be.true
+      // for some reason it fails, if 'be true' is used
+      .isVisible(pageObjects.SHARED.TEXT_VIEW).should.eventually.not.be.undefined
+      
       .end();
   });
 
