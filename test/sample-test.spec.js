@@ -1,33 +1,6 @@
-const path = require('path');
-const scriptName = path.basename(__filename);
-const dirname = path.resolve(__dirname);
-const wdio = require('webdriverio');
-const pathToApk = dirname + '/app-debug.apk';
-const data = require('../data/config.json');
-const userDetails = data.USER;
-const androidDetails = data.ANDROID_DETAILS;
-const appiumDetails = data.APPIUM_DETAILS;
-const MAX_WAIT = 5000;
-
-const options = {
-  port: appiumDetails.port,
-  logLevel: appiumDetails.logLevel,
-  desiredCapabilities: {
-    platformName: 'Android',
-    platformVersion: androidDetails.platformVersion,
-    deviceName: androidDetails.deviceName,
-    app: pathToApk,
-    chromeOptions: {
-      distribution: {
-        skip_first_run_ui: true,
-        show_welcome_page: true,
-        import_bookmarks: false,
-        make_chrome_default: false,
-        ignore_certificate_errors: true
-      }
-    }
-  }
-}
+const common = require('./common');
+const chai = common.chai;
+const client = common.client;
 
 const pageObjects = {
   "TOOLBAR": {
@@ -80,14 +53,8 @@ const navigationHeadings = {
   TRUST_CHECK_INFO: "Trust Check Info"
 }
 
-var client = wdio.remote(options);
-const chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-chai.should();
-chaiAsPromised.transferPromiseness = client.transferPromiseness;
 
-describe(scriptName, () => {
+describe('Run android e2e', () => {
 
   
   // xit('should log into and out of application', (done) => {
