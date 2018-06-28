@@ -1,20 +1,16 @@
 const path = require('path');
 const dirname = path.resolve(__dirname);
 const wdio = require('webdriverio');
-const pathToApk = dirname + '/app-debug.apk';
-const data = require('../data/config.json');
-const userDetails = data.USER;
-const androidDetails = data.ANDROID_DETAILS;
-const appiumDetails = data.APPIUM_DETAILS;
-const MAX_WAIT = 5000;
+const pathToApk = dirname + '/android-native.apk';
+const appiumSettings = require('../constants/android').appiumSettings;
 
 const options = {
-  port: appiumDetails.port,
-  logLevel: appiumDetails.logLevel,
+  port: appiumSettings.APPIUM_DETAILS.PORT,
+  logLevel: appiumSettings.APPIUM_DETAILS.LOG_LEVEL,
   desiredCapabilities: {
     platformName: 'Android',
-    platformVersion: androidDetails.platformVersion,
-    deviceName: androidDetails.deviceName,
+    platformVersion: appiumSettings.ANDROID_DETAILS.PLATFORM_VERSION,
+    deviceName: appiumSettings.ANDROID_DETAILS.DEVICE_NAME,
     app: pathToApk,
     chromeOptions: {
       distribution: {
@@ -28,9 +24,9 @@ const options = {
   }
 }
 
-var client = wdio.remote(options);
+const client = wdio.remote(options);
 const chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
+const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.should();
 chaiAsPromised.transferPromiseness = client.transferPromiseness;
