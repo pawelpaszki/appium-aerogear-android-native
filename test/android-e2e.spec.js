@@ -79,6 +79,16 @@ describe('Run android e2e', () => {
       .end();
   });
 
+  it('should check for the presence of home screen itemss', () => {
+    console.log(process.env.LOGIN);
+    console.log(process.env.PASSWORD);
+    return client
+      .init()
+      .isVisible(pageObjects.HOME_SCREEN.IMAGE_VIEW).should.eventually.be.true
+      .isVisible(pageObjects.HOME_SCREEN.TEXT_VIEW).should.eventually.be.true
+      .end();
+  });
+
   // it('should log into and out of application (transfer promisness)', () => {
   //   return client
   //     .init()
