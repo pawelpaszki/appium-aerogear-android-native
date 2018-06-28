@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const path = require('path');
 const dirname = path.resolve(__dirname);
 const wdio = require('webdriverio');

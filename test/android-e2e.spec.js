@@ -9,6 +9,8 @@ const navigationHeaders = sharedConstants.navigationHeaders;
 describe('Run android e2e', () => {
 
   it('should check for the presence of all of the navigation items', () => {
+    console.log(process.env.LOGIN);
+    console.log(process.env.PASSWORD);
     return client
       .init()
       .isVisible(pageObjects.TOOLBAR.TOOLBAR_TITLE_TEXT_VIEW).should.eventually.be.true
